@@ -8,10 +8,12 @@ datasource db {
 }
 
 model Habit {
-  id         String       @id @default(uuid())
-  title      String
-  createdAt  DateTime
-  DailyTotal DailyTotal[]
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime
+
+  DailyHabit    DailyHabit[]
+  HabitWeekDays HabitWeekDays[]
 
   @@map("habits")
 }
@@ -21,20 +23,23 @@ model HabitWeekDays {
   habitId String
   weekDay Int
 
+  habit Habit @relation(fields: [habitId], references: [id])
+
   @@unique([habitId, weekDay])
   @@map("habit_week_days")
 }
 
 model Day {
-  id         String       @id @default(uuid())
-  date       DateTime
-  DailyTotal DailyTotal[]
+  id   String   @id @default(uuid())
+  date DateTime
+
+  DailyHabit DailyHabit[]
 
   @@unique([date])
   @@map("days")
 }
 
-model DailyTotal {
+model DailyHabit {
   id String @id @default(uuid())
 
   dayId   String
