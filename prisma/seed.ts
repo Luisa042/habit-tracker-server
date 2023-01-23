@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from "../src/lib/prisma";
 
 const habit1 = '16c89f09-0ada-4203-aefd-3eec2e383277';
 const habit2 = '46b775ea-4d08-44e3-8c6e-17d73ee08c7e';
